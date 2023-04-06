@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-4">
-            <form action="{{ route('orders.create') }}" method="post">
+            <form action="{{ route('orders.store') }}" method="post">
                 @csrf
                 <div class="mb-3">
                     <label for="customer_id" class="form-label">

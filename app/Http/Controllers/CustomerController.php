@@ -6,9 +6,10 @@ use App\Events\OrderCreated;
 use App\Http\Requests\CreateCustomerRequest;
 use App\Models\Customer;
 use App\Models\Order;
-use Illuminate\Http\Request;
+use Illuminate\Http\Client\Request;
 
-class OrderController extends Controller
+
+class CustomerController extends Controller
 {
     public function index()
     {
@@ -17,19 +18,20 @@ class OrderController extends Controller
         ]);
     }
 
-    public function create(CreateCustomerRequest $request)
+
+    public function create()
+    {
+        return view('pages.orders', [
+            'customers' => Customer::all()
+        ]);
+    }
+    public function store(CreateCustomerRequest $request)
     {
         $order = new Order($request->validated());
         $order->save();
         event(new OrderCreated($order));
 
-        return redirect()->route('list.index');
-    }
-    public function store()
-    {
-        return view('pages.orders', [
-            'customers' => Customer::all(),
-        ]);
+        return redirect()->route('orders-list.index');
     }
 
 }

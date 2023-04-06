@@ -44,8 +44,8 @@ class UserOrderCreated extends Mailable
     {
         return new Content(
             htmlString: 'The order '.$this->order->id.'has been created.
-                         Total : '.$this->order->total.
-                        'Where customer_id is : '. $this->order->customer_id,
+                         Total : '.$this->order->total. ' ' .
+                        'Where customer_id is : '. $this->order->customer_id .' '. 'And name' . $this->order->customer
         );
     }
 

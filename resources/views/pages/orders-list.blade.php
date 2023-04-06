@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <a href="{{ route('orders.store') }}" class="btn btn-primary">Back to Orders Create</a>
+                <a href="{{ route('orders.create') }}" class="btn btn-primary">Back to Orders Create</a>
             </div>
         </div>
     </div>

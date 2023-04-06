@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/orders', [OrderController::class, 'store'])->name('orders.store');
-Route::post('/orders/create', [OrderController::class, 'create'])->name('orders.create');
-Route::get('/list', [OrderController::class, 'index'])->name('list.index');
+
+
+Route::get('/orders/list', [CustomerController::class, 'index'])->name('orders-list.index');
+Route::get('/create', [CustomerController::class, 'create'])->name('orders.create');
+Route::post('/orders', [CustomerController::class, 'store'])->name('orders.store');
+
+
+/*Route::get('/orders', [OrderController::class, 'store'])->name('orders.store');
+Route::post('/create', [OrderController::class, 'create'])->name('orders.create');
+Route::get('/list', [OrderController::class, 'index'])->name('list.index');*/
+
