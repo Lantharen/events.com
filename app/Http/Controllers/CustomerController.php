@@ -6,18 +6,21 @@ use App\Events\OrderCreated;
 use App\Http\Requests\CreateCustomerRequest;
 use App\Models\Customer;
 use App\Models\Order;
-use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class CustomerController extends Controller
 {
     public function index()
     {
-        return view('pages.orders-list', [
-            'customers' => Customer::all()
-        ]);
-    }
+        $data = DB::table('customers')
+            ->leftJoin('orders', 'customers.id', '=', 'orders.customer_id')
+            ->select('customers.name', 'customers.email', 'orders.total')
+            ->orderBy('name', 'asc')
+            ->get();
 
+        return view('pages.orders-list', compact('data'));
+    }
 
     public function create()
     {
@@ -25,6 +28,7 @@ class CustomerController extends Controller
             'customers' => Customer::all()
         ]);
     }
+
     public function store(CreateCustomerRequest $request)
     {
         $order = new Order($request->validated());

@@ -13,17 +13,17 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Total</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($customers as $customer)
+                @foreach ($data as $row)
                     <tr>
-                        <th scope="row">{{ $customer->id }}</th>
-                        <td>{{ $customer->name }}</td>
-                        <td>{{ $customer->email }}</td>
+                        <td>{{ $row->name }}</td>
+                        <td>{{ $row->email }}</td>
+                        <td>{{ $row->total }}</td>
                     </tr>
                 @endforeach
                 </tbody>
