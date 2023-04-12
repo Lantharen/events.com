@@ -19,13 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::get('/order/create', [OrderController::class, 'create'])->name('orders.create');
+Route::post('/order/store', [OrderController::class, 'store'])->name('orders.store');
 
-Route::get('/orders/list', [CustomerController::class, 'index'])->name('orders-list.index');
-Route::get('/create', [CustomerController::class, 'create'])->name('orders.create');
-Route::post('/orders', [CustomerController::class, 'store'])->name('orders.store');
 
 
-/*Route::get('/orders', [OrderController::class, 'store'])->name('orders.store');
-Route::post('/create', [OrderController::class, 'create'])->name('orders.create');
-Route::get('/list', [OrderController::class, 'index'])->name('list.index');*/
+Route::get('/customers', [CustomerController::class, 'index'])->name('customers.index');
+Route::get('/customer/create', [CustomerController::class, 'create'])->name('customers.create');
+Route::post('/customer/store', [CustomerController::class, 'store'])->name('customers.store');
+
+
 

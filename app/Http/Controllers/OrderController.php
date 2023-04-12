@@ -6,30 +6,33 @@ use App\Events\OrderCreated;
 use App\Http\Requests\CreateCustomerRequest;
 use App\Models\Customer;
 use App\Models\Order;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        return view('pages.orders-list', [
-            'customers' => Customer::all()
+        $orders = Order::with('customer')->get();
+
+        return view('pages.orders',[
+            'orders' => $orders
         ]);
     }
 
-    public function create(CreateCustomerRequest $request)
+    public function create()
+    {
+        $orders = Order::with('customer')->get();
+
+        return view('pages.create-orders',[
+            'orders' => $orders
+        ]);
+    }
+    public function store(CreateCustomerRequest $request)
     {
         $order = new Order($request->validated());
         $order->save();
         event(new OrderCreated($order));
 
-        return redirect()->route('list.index');
-    }
-    public function store()
-    {
-        return view('pages.orders', [
-            'customers' => Customer::all(),
-        ]);
+        return redirect()->route('orders.index');
     }
 
 }
